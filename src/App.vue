@@ -1,14 +1,18 @@
 <template>
-  <div>
+  <div class="container mt-4">
     <TaskForm @addTask="addTask" />
-    <task-list :tasks="tasks" @delete="deleteTask" @update-task="updateTask" />
+    <task-list
+      :tasks="tasks"
+      @delete="deleteTask"
+      @update-task="updateTask"
+      @toggleCompleted="toggleCompleted"
+    />
   </div>
 </template>
 
 <script>
 import TaskForm from "@/components/TaskForm";
 import TaskList from "@/components/TaskList.vue";
-
 import axios from "axios";
 
 export default {
@@ -52,6 +56,13 @@ export default {
         this.tasks.splice(taskIndex, 1, updatedTask);
       }
     },
+    toggleCompleted(id) {
+      this.tasks.forEach((task) => {
+        if (task.id === id) {
+          task.completed = !task.completed;
+        }
+      });
+    },
   },
   mounted() {
     this.fetchTasks();
@@ -61,8 +72,8 @@ export default {
 
 <style>
 * {
-  margin: 0;
-  padding: 0;
+  /* margin: 0;
+  padding: 0; */
 }
 
 #app {

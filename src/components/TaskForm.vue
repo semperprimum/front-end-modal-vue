@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-between m-2 align-items-center">
+  <div class="container d-flex justify-content-between align-items-center">
     <HeaderView />
     <div class="mymodal">
       <!-- Button trigger modal -->
