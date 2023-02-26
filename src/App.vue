@@ -48,13 +48,11 @@ export default {
       this.tasks = this.tasks.filter((t) => t.id !== task.id);
     },
     updateTask(payload) {
-      const taskIndex = this.tasks.findIndex((t) => t.id === payload.taskId);
-      if (taskIndex >= 0) {
-        const updatedTask = Object.assign({}, this.tasks[taskIndex], {
-          title: payload.editedTitle,
-        });
-        this.tasks.splice(taskIndex, 1, updatedTask);
-      }
+      this.tasks.forEach((task) => {
+        if (task.title === payload.taskTitle) {
+          task.title = payload.editedTitle;
+        }
+      });
     },
     toggleCompleted(id) {
       this.tasks.forEach((task) => {
